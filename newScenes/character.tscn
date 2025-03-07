@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=3 uid="uid://dimuoqm1seq0e"]
+
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_lc1b6"]
+[ext_resource type="Texture2D" uid="uid://eb6tgsp3bfxu" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_climb2.png" id="1_yqh2i"]
+[ext_resource type="Texture2D" uid="uid://bonh3xedobigx" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_climb1.png" id="2_e1t4n"]
+[ext_resource type="Texture2D" uid="uid://dq0fd2o0v5lfc" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_duck.png" id="3_ra570"]
+[ext_resource type="Texture2D" uid="uid://dud44hm7lq61s" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_hit.png" id="4_cntor"]
+[ext_resource type="Texture2D" uid="uid://crenr4ge335u8" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_stand.png" id="5_orceh"]
+[ext_resource type="Texture2D" uid="uid://cy426xom8q1hy" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_jump.png" id="6_wt14l"]
+[ext_resource type="Texture2D" uid="uid://8v88aplcpxyh" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_swim1.png" id="7_8glq0"]
+[ext_resource type="Texture2D" uid="uid://cs0ioe4suc7qj" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_swim2.png" id="8_k6m7b"]
+[ext_resource type="Texture2D" uid="uid://cpoeetruhd5yh" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_walk1.png" id="9_mcp81"]
+[ext_resource type="Texture2D" uid="uid://hlbua067qj7y" path="res://assets/kenney_platformerpack/PNG/Players/128x256/Pink/alienPink_walk2.png" id="10_768eg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2gwr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e1t4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_yqh2i")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e1t4n")
+}],
+"loop": true,
+"name": &"climb_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ra570")
+}],
+"loop": false,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cntor")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_orceh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wt14l")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8glq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k6m7b")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_mcp81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_768eg")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5r6in"]
+radius = 42.0
+height = 128.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(247, 158)
+collision_layer = 4
+script = ExtResource("1_lc1b6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e2gwr")
+animation = &"climb_idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 65)
+shape = SubResource("CapsuleShape2D_5r6in")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-1, 64)
+target_position = Vector2(1, -67)
+collision_mask = 2

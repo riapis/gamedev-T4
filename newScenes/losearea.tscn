@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://buya2xl2ipuep"]
+
+[node name="losearea" type="Area2D"]

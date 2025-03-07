@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4aehfhmwves6"]
+
+[ext_resource type="Script" path="res://scripts/worm.gd" id="1_03m3n"]
+[ext_resource type="Texture2D" uid="uid://brwaluaj2oqfl" path="res://assets/kenney_platformerpack/PNG/Enemies/wormGreen.png" id="1_4foun"]
+[ext_resource type="Texture2D" uid="uid://bvbwwedlhyb7i" path="res://assets/kenney_platformerpack/PNG/Enemies/wormGreen_move.png" id="2_bvlkx"]
+[ext_resource type="PackedScene" uid="uid://tkkkp0m17hxd" path="res://scenes/killzone.tscn" id="4_m55bo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_172lq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4foun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bvlkx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qa5lb"]
+radius = 14.8573
+height = 29.7147
+
+[node name="worm" type="Node2D"]
+script = ExtResource("1_03m3n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_172lq")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Killzone" parent="." instance=ExtResource("4_m55bo")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-1.78814e-07, 45)
+rotation = -1.56074
+scale = Vector2(1.05636, 3.83697)
+shape = SubResource("CapsuleShape2D_qa5lb")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(-2, 39)
+target_position = Vector2(55, 1)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-2, 39)
+target_position = Vector2(-54, 0)

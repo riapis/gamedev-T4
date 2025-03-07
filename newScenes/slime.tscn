@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://k0hh5xeg6fcc"]
+
+[ext_resource type="Texture2D" uid="uid://1ir7yofnx73q" path="res://assets/kenney_platformerpack/PNG/Enemies/slimeBlue.png" id="1_ahknr"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_sasgq"]
+[ext_resource type="Texture2D" uid="uid://c5sbiq7c88c08" path="res://assets/kenney_platformerpack/PNG/Enemies/slimeBlue_move.png" id="2_0ft7i"]
+[ext_resource type="PackedScene" uid="uid://tkkkp0m17hxd" path="res://scenes/killzone.tscn" id="3_ixtb1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rx4j3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ahknr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0ft7i")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2usp4"]
+radius = 24.8828
+height = 88.0115
+
+[node name="slime" type="Node2D"]
+script = ExtResource("1_sasgq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rx4j3")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.416667
+
+[node name="Killzone" parent="." instance=ExtResource("3_ixtb1")]
+position = Vector2(1, 39)
+rotation = -1.57753
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(2.99993, 0.0201933)
+scale = Vector2(1.16544, 0.955645)
+shape = SubResource("CapsuleShape2D_2usp4")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(2, 38)
+target_position = Vector2(41, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(2, 38)
+target_position = Vector2(-45, 0)

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuylgurg1aioo"]
+
+[ext_resource type="Texture2D" uid="uid://bivk5n8i3vnqc" path="res://assets/kenney_platformerpack/PNG/Enemies/fishBlue.png" id="1_tbqec"]
+[ext_resource type="PackedScene" uid="uid://tkkkp0m17hxd" path="res://scenes/killzone.tscn" id="2_mqs53"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1x5jx"]
+radius = 35.0
+height = 104.0
+
+[node name="Fish" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tbqec")
+flip_v = true
+
+[node name="Killzone" parent="." instance=ExtResource("2_mqs53")]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionKill" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 1)
+scale = Vector2(1.001, 1.001)
+shape = SubResource("CapsuleShape2D_1x5jx")
+
+[connection signal="body_entered" from="." to="." method="_on_fish_body_entered"]
+
+[editable path="Killzone"]
